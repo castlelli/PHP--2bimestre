@@ -13,10 +13,34 @@ class CursoController extends Controller
         return view('admin.cursos.index', compact('rows'));
     }
 
-    public function atualizar($id) {
+    public function editar($id) {
         $linha = Curso::find($id);
         return view('admin.cursos.editar',compact('linha'));
     }
+
+    public function atualizar(Request $req, $id){   
+        $dados = $req->all();
+        
+        if(isset($dados['publicado'])){
+            $dados['publicado'] = 'sim';
+        } else {
+            $dados['publicado'] = 'nao';
+        }
+        
+        if($req->hasFile('arquivo')){
+            $imagem = $req->file('arquivo');
+            $num = rand(1111,9999);
+            $dir = "img/cursos/";
+            $ex = $imagem->guessClientExtension();
+            $nomeImagem = "imagem_".$num.".".$ex;
+            $imagem->move($dir,$nomeImagem);
+            $dados['imagem'] = $dir."/".$nomeImagem;
+        }
+        
+        Curso::find($id)->update($dados);
+        
+        return redirect()->route('admin.cursos');
+    }  
 
     public function excluir($id) {
         Curso::find($id)->delete();
@@ -34,10 +58,10 @@ class CursoController extends Controller
         
         if($req->hasFile('arquivo')){
             $imagem = $req->file('arquivo');
-            $num = rand(1111,9999);
+            $num = rand(1111,9999); //Para nomear, usamos numerações aleatórias aqui. Não é o ideal para aplicações reais.
             $dir = "img/cursos";
             $ex = $imagem->guessClientExtension();
-            $nomeImagem = "imagem_".$num.".".$ex;
+            $nomeImagem = "imagem_".$num.".".$ex; //É necessário mudar o nome da imagem que o usuário manda. Evita nomes repetidos.
             $imagem->move($dir,$nomeImagem);
             $dados['imagem'] = $dir."/".$nomeImagem;
         }

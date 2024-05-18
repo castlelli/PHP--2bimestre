@@ -6,14 +6,13 @@
 <div class='container'>
     <h3 class='center'>Lista de Cursos</h3>
     <div class='row'>
-        <table>
+        <table class="striped centered responsive-table">
             <thead>
                 <tr> <!-- CABECALHO -->
-                    <th>Id</th>
                     <th>Titulo</th>
-                    <th>Descrição</th>
                     <th>Publicado</th>
                     <th>Valor</th>
+                    <th>Descrição</th>
                     <th>Imagem</th>
                     <th>Ação</th>
                 </tr>
@@ -21,11 +20,13 @@
             <tbody>
                 @foreach($rows as $row) <!-- LOOP PRA LER A TABELA -->
                 <tr>
-                    <td>{{ $row->id }}</td><td>{{ $row->titulo }}</td>
+                    <td> {{$row -> titulo }}</td>
+                    <td>{{ $row->publicado }}</td>
+                    <td>{{ $row->valor }}</td>
                     <td>{{ $row->descricao }}</td>
-                    <td>{{ $row->publicado }}</td><td>{{ $row->valor }}</td>
-                    <td><img src="{{ asset($row->imagem) }}"
-                    alt="{{ $row->titulo }}"></td>
+                    <td><img src="{{ asset($row->imagem) }}" width="100"
+                    alt="{{ $row->titulo }}" class="circle responsive-img"></td>
+
                     <td> <!-- COLUNA COM ALTERAR E EXCLUIR -->
                     <a class='btn deep-orange'
                     href="{{ route('admin.cursos.editar',$row->id) }}">Alterar</a>

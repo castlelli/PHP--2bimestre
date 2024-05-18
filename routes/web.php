@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 Route::get('/admin/cursos',
 ['as' =>'admin.cursos',
 'uses'=>'App\Http\Controllers\Admin\CursoController@index']);
