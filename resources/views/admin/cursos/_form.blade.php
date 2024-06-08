@@ -5,9 +5,9 @@
 
     <div class="input-field">
         <input id="input_text" type="text" class="validate" 
-        data-length="10" name="descricao" value="{{ isset($linha->descricao) ? $linha->descricao : '' }}">
-        <label for="input_text">Input text</label> 
-        <span class="helper-text" data-error="Máximo de 10 caracteres" data-success="Válido"></span>   
+        data-length="30" name="descricao" value="{{ isset($linha->descricao) ? $linha->descricao : '' }}">
+        <label for="input_text">Descrição</label> 
+        <span class="helper-text" data-error="Máximo de 30 caracteres" data-success="Válido"></span>   
 </div>
 
     <div class="input-field">
